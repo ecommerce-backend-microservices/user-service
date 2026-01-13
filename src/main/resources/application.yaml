@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: user-services
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_service
+    username: root
+    password: root123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+server:
+  port: 8082
