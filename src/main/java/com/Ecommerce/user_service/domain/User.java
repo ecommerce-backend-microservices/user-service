@@ -1,26 +1,46 @@
 package com.Ecommerce.user_service.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.time.Instant;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
-    private String password;
+    private String passwordHash;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String phone;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status = UserStatus.ACTIVE;
+
+    private Instant createdAt = Instant.now();
+
+    protected User() {}
+
+    public User(String email, String passwordHash, String name, String phone) {
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.name = name;
+        this.phone = phone;
+    }
+
+    // getters only (immutability mindset)
+    public String getId() { return id; }
+    public String getEmail() { return email; }
+    public String getName() { return name; }
+    public String getPhone() { return phone; }
+    public UserStatus getStatus() { return status; }
 }
