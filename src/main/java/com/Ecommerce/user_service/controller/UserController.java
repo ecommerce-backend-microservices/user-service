@@ -1,5 +1,6 @@
 package com.Ecommerce.user_service.controller;
 import com.Ecommerce.user_service.dto.CreateUserRequest;
+import com.Ecommerce.user_service.dto.LoginUserRequest;
 import com.Ecommerce.user_service.dto.UserResponse;
 import com.Ecommerce.user_service.service.UserService;
 import jakarta.validation.Valid;
@@ -16,9 +17,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse register(@Valid @RequestBody CreateUserRequest request) {
         return userService.register(request);
+    }
+    @PostMapping("/login")
+    public String LoginUserRequest(@Valid @RequestBody LoginUserRequest loginUserRequest){
+        return userService.login(loginUserRequest);
     }
 }

@@ -43,4 +43,8 @@ public class User {
     public String getName() { return name; }
     public String getPhone() { return phone; }
     public UserStatus getStatus() { return status; }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 }

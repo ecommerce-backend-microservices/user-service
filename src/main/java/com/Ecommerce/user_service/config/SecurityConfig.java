@@ -21,21 +21,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                // ❌ Disable CSRF (we are building REST APIs)
                 .csrf(csrf -> csrf.disable())
-
-                // ❌ Disable form login & basic auth UI
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form.disable())
-
-                // ✅ Authorization rules
                 .authorizeHttpRequests(auth -> auth
-                        // PUBLIC APIs
-                        .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
-
-                        // EVERYTHING ELSE NEEDS AUTH (later)
                         .anyRequest().authenticated()
                 );
 
