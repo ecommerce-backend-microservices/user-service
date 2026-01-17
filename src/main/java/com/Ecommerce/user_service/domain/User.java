@@ -9,7 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -38,7 +38,7 @@ public class User {
     }
 
     // getters only (immutability mindset)
-    public String getId() { return id; }
+    public Long getId() { return id; }
     public String getEmail() { return email; }
     public String getName() { return name; }
     public String getPhone() { return phone; }
